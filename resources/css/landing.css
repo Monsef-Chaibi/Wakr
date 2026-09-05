@@ -32,6 +32,9 @@ nav { align-items: center; background: rgba(255, 254, 249, .88); border: 1px sol
 .nav-links a:hover { color: #ffd34e; }
 .mobile-menu-button, .mobile-menu, .mobile-menu-backdrop { display: none; }
 .nav-right { gap: 10px; }
+.nav-auth-guest, .nav-auth-user { align-items: center; display: flex; gap: 10px; }
+.nav-auth-user form, .mobile-menu-actions form { margin: 0; }
+.nav-user-name { color: var(--forest); font-size: .86rem; font-weight: 700; }
 .language-switcher { border-inline: 1px solid var(--line); padding-inline: 14px; }
 .lang-toggle, .lang-toggle-footer { cursor: pointer; display: inline-flex; }
 .lang-toggle-input { display: none; }

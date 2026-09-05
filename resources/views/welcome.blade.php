@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ __('app_name') }} - {{ __('hero_title') }}</title>
-    @vite(['resources/css/app.css', 'resources/css/landing.css', 'resources/js/landing.js'])
+    @vite(['resources/css/app.css', 'resources/css/landing.css', 'resources/js/app.js', 'resources/js/landing.js'])
 </head>
 <body>
     <!-- HEADER / NAVIGATION -->
@@ -41,8 +41,20 @@
                         </span>
                     </label>
                 </div>
-                <a href="{{ route('login') }}" class="btn-login">{{ __('nav_login') }}</a>
-                <a href="{{ route('register') }}" class="btn-primary">{{ __('nav_get_started') }}</a>
+                @auth
+                    <div class="nav-auth-user">
+                        <span class="nav-user-name">{{ auth()->user()->name }}</span>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn-login">Log out</button>
+                        </form>
+                    </div>
+                @else
+                    <div class="nav-auth-guest">
+                        <a href="{{ route('login') }}" class="btn-login">{{ __('nav_login') }}</a>
+                        <a href="{{ route('register') }}" class="btn-primary">{{ __('nav_get_started') }}</a>
+                    </div>
+                @endauth
             </div>
         </nav>
     </header>
@@ -67,8 +79,16 @@
                     <span class="lang-toggle-label ar-label">AR</span>
                 </span>
             </label>
-            <a href="{{ route('login') }}" class="btn-login">{{ __('nav_login') }}</a>
-            <a href="{{ route('register') }}" class="btn-primary">{{ __('nav_get_started') }}</a>
+            @auth
+                <span class="nav-user-name">{{ auth()->user()->name }}</span>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn-login">Log out</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="btn-login">{{ __('nav_login') }}</a>
+                <a href="{{ route('register') }}" class="btn-primary">{{ __('nav_get_started') }}</a>
+            @endauth
         </div>
     </aside>
 
@@ -287,4 +307,7 @@
             </div>
         </div>
     </footer>
+
+    @include('components.toast')
+</body>
 </html>

@@ -25,12 +25,18 @@ class AuthController extends Controller
         if (! Auth::attempt($credentials, $request->boolean('remember'))) {
             return back()->withErrors([
                 'email' => 'Those credentials do not match our records.',
+            ])->with('toast', [
+                'icon' => 'error',
+                'message' => 'The email or password is incorrect.',
             ])->onlyInput('email');
         }
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/')->with('status', 'Welcome back to Wakr.');
+        return redirect()->intended('/')->with('toast', [
+            'icon' => 'success',
+            'message' => 'Welcome back to Wakr.',
+        ]);
     }
 
     public function showRegister(): View
@@ -51,7 +57,10 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect('/')->with('status', 'Your Wakr workspace is ready.');
+        return redirect('/')->with('toast', [
+            'icon' => 'success',
+            'message' => 'Your Wakr workspace is ready.',
+        ]);
     }
 
     public function logout(Request $request): RedirectResponse
@@ -60,6 +69,9 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('toast', [
+            'icon' => 'success',
+            'message' => 'You have been signed out.',
+        ]);
     }
 }
