@@ -8,6 +8,10 @@
     @vite(['resources/css/app.css', 'resources/css/landing.css', 'resources/js/app.js', 'resources/js/landing.js'])
 </head>
 <body>
+    @php
+        $loginUrl = app()->getLocale() === 'ar' ? url('/ar/login') : route('login');
+        $registerUrl = app()->getLocale() === 'ar' ? url('/ar/register') : route('register');
+    @endphp
     <!-- HEADER / NAVIGATION -->
     <header>
         <nav>
@@ -51,8 +55,8 @@
                     </div>
                 @else
                     <div class="nav-auth-guest">
-                        <a href="{{ route('login') }}" class="btn-login">{{ __('nav_login') }}</a>
-                        <a href="{{ route('register') }}" class="btn-primary">{{ __('nav_get_started') }}</a>
+                        <a href="{{ $loginUrl }}" class="btn-login">{{ __('nav_login') }}</a>
+                        <a href="{{ $registerUrl }}" class="btn-primary">{{ __('nav_get_started') }}</a>
                     </div>
                 @endauth
             </div>
@@ -86,8 +90,8 @@
                     <button type="submit" class="btn-login">Log out</button>
                 </form>
             @else
-                <a href="{{ route('login') }}" class="btn-login">{{ __('nav_login') }}</a>
-                <a href="{{ route('register') }}" class="btn-primary">{{ __('nav_get_started') }}</a>
+                <a href="{{ $loginUrl }}" class="btn-login">{{ __('nav_login') }}</a>
+                <a href="{{ $registerUrl }}" class="btn-primary">{{ __('nav_get_started') }}</a>
             @endauth
         </div>
     </aside>
@@ -98,8 +102,8 @@
             <h1>{{ __('hero_title') }}</h1>
             <p>{{ __('hero_subtitle') }}</p>
             <div class="hero-buttons">
-                <a href="{{ route('register') }}" class="btn-primary">{{ __('hero_btn_started') }}</a>
-                <a href="{{ route('login') }}" class="btn-secondary">{{ __('hero_btn_login') }}</a>
+                <a href="{{ $registerUrl }}" class="btn-primary">{{ __('hero_btn_started') }}</a>
+                <a href="{{ $loginUrl }}" class="btn-secondary">{{ __('hero_btn_login') }}</a>
             </div>
         </div>
 
@@ -247,8 +251,8 @@
     <section class="final-cta">
         <h2>{{ __('cta_heading') }}</h2>
         <div class="cta-buttons">
-            <a href="{{ route('register') }}" class="btn-primary">{{ __('cta_btn_account') }}</a>
-            <a href="{{ route('login') }}" class="btn-secondary">{{ __('cta_btn_login') }}</a>
+            <a href="{{ $registerUrl }}" class="btn-primary">{{ __('cta_btn_account') }}</a>
+            <a href="{{ $loginUrl }}" class="btn-secondary">{{ __('cta_btn_login') }}</a>
         </div>
     </section>
 

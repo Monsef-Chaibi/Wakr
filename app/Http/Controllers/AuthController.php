@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -15,7 +16,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request): RedirectResponse
+    public function login(Request $request): RedirectResponse|JsonResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -23,19 +24,32 @@ class AuthController extends Controller
         ]);
 
         if (! Auth::attempt($credentials, $request->boolean('remember'))) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => __('auth_invalid_credentials'),
+                ], 422);
+            }
+
             return back()->withErrors([
                 'email' => 'Those credentials do not match our records.',
             ])->with('toast', [
                 'icon' => 'error',
-                'message' => 'The email or password is incorrect.',
+                'message' => __('auth_invalid_credentials'),
             ])->onlyInput('email');
         }
 
         $request->session()->regenerate();
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'redirect' => url('/'),
+                'message' => __('auth_welcome_message'),
+            ]);
+        }
+
         return redirect()->intended('/')->with('toast', [
             'icon' => 'success',
-            'message' => 'Welcome back to Wakr.',
+            'message' => __('auth_welcome_message'),
         ]);
     }
 
@@ -59,7 +73,7 @@ class AuthController extends Controller
 
         return redirect('/')->with('toast', [
             'icon' => 'success',
-            'message' => 'Your Wakr workspace is ready.',
+            'message' => __('auth_workspace_ready'),
         ]);
     }
 
@@ -71,7 +85,7 @@ class AuthController extends Controller
 
         return redirect('/')->with('toast', [
             'icon' => 'success',
-            'message' => 'You have been signed out.',
+            'message' => __('auth_signed_out'),
         ]);
     }
 }

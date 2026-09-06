@@ -10,9 +10,11 @@
 }
 
 html,
-body {
+body
+{
     font-family: 'Jost', ui-sans-serif, system-ui, sans-serif;
 }
+
 .ADLaM
 {
     font-family: 'ADLaM Display';

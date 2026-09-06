@@ -28,6 +28,7 @@
 .auth-panel { align-items: center; background: var(--auth-paper); display: flex; justify-content: center; padding: 48px clamp(28px, 8vw, 120px); }
 .auth-form-wrap { max-width: 430px; width: 100%; }
 .form-heading { margin-bottom: 32px; }
+.auth-language { color: var(--auth-forest); display: inline-block; font-size: .78rem; font-weight: 700; margin-bottom: 18px; text-decoration: none; }
 .form-heading h2 { color: var(--auth-forest); font-family: 'ADLaM Display', sans-serif; font-size: clamp(2.3rem, 4vw, 3.7rem); font-weight: 400; letter-spacing: 0; line-height: 1.03; margin-top: 12px; }
 .form-heading p { color: var(--auth-muted); margin-top: 16px; }
 .auth-form { display: grid; gap: 19px; }
