@@ -42,12 +42,12 @@ class AuthController extends Controller
 
         if ($request->expectsJson()) {
             return response()->json([
-                'redirect' => url('/'),
+                'redirect' => $this->dashboardUrl(),
                 'message' => __('auth_welcome_message'),
             ]);
         }
 
-        return redirect()->intended('/')->with('toast', [
+        return redirect()->intended($this->dashboardUrl())->with('toast', [
             'icon' => 'success',
             'message' => __('auth_welcome_message'),
         ]);
@@ -71,7 +71,7 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect('/')->with('toast', [
+        return redirect($this->dashboardUrl())->with('toast', [
             'icon' => 'success',
             'message' => __('auth_workspace_ready'),
         ]);
@@ -87,5 +87,10 @@ class AuthController extends Controller
             'icon' => 'success',
             'message' => __('auth_signed_out'),
         ]);
+    }
+
+    private function dashboardUrl(): string
+    {
+        return app()->getLocale() === 'ar' ? url('/ar/dashboard') : route('dashboard');
     }
 }

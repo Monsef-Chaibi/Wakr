@@ -9,7 +9,7 @@
 <body class="auth-page">
     <main class="auth-shell">
         <section class="auth-intro">
-            <a class="auth-brand" href="{{ url('/') }}">
+            <a class="auth-brand mx-auto md:mx-0" href="{{ url('/') }}">
                 <img src="{{ asset('images/wakr/wakrlogo.png') }}" alt="Wakr">
                 <span>{{ __('app_name') }}</span>
             </a>
@@ -21,9 +21,9 @@
             <div class="intro-mark hidden md:block" aria-hidden="true">W</div>
         </section>
 
-        <section class="auth-panel">
+        <section class="auth-panel min-h-screen">
             <div class="auth-form-wrap">
-                <div class="mobile-brand"><span>Wakr</span><span class="status-dot"></span></div>
+
                 <div class="form-heading">
                     <span class="eyebrow">{{ __('auth_welcome_back') }}</span>
                     <h2>{!! __('auth_sign_in_workspace') !!}</h2>

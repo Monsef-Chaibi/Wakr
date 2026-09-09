@@ -8,24 +8,22 @@
 </head>
 <body class="auth-page">
     <main class="auth-shell">
-        <section class="auth-intro auth-intro-register">
-            <a class="auth-brand" href="{{ url('/') }}">
+        <section class="auth-intro">
+            <a class="auth-brand mx-auto md:mx-0" href="{{ url('/') }}">
                 <img src="{{ asset('images/wakr/wakrlogo.png') }}" alt="Wakr">
                 <span>{{ __('app_name') }}</span>
             </a>
-            <div class="intro-copy">
-                <span class="auth-kicker">{{ __('auth_register_kicker') }}</span>
-                <h1>{!! __('auth_register_intro_title') !!}</h1>
-                <p>{{ __('auth_register_intro_desc') }}</p>
+            <div class="intro-copy hidden md:block">
+                <span class="auth-kicker">{{ __('auth_login_kicker') }}</span>
+                <h1>{!! __('auth_login_intro_title') !!}</h1>
+                <p>{{ __('auth_login_intro_desc') }}</p>
             </div>
-            <div class="intro-mark" aria-hidden="true">W</div>
+            <div class="intro-mark hidden md:block" aria-hidden="true">W</div>
         </section>
 
         <section class="auth-panel">
             <div class="auth-form-wrap">
-                <div class="mobile-brand"><span>Wakr</span><span class="status-dot"></span></div>
                 <div class="form-heading">
-                    <a class="auth-language" href="{{ app()->getLocale() === 'ar' ? url('/register') : url('/ar/register') }}">{{ app()->getLocale() === 'ar' ? __('auth_switch_to_en') : __('auth_switch_to_ar') }}</a>
                     <span class="eyebrow">{{ __('auth_start_journey') }}</span>
                     <h2>{!! __('auth_create_workspace') !!}</h2>
                     <p>{{ __('auth_register_desc') }}</p>

@@ -16,7 +16,7 @@
     <header>
         <nav>
             <a href="/" class="logo-section">
-                <div class=""><img src="{{ asset('images/wakr/wakrlogo.png') }}" alt="Wakr Logo"></div>
+                <div class="w-10 md:w-12"><img src="{{ asset('images/wakr/wakrlogoxl.png') }}" alt="Wakr Logo"></div>
                 <div class="logo-text">{{ __('logo_text') }}</div>
             </a>
 
@@ -162,7 +162,7 @@
             <div class="feature-card">
                 <div class="feature-icon">
                     <img
-                        src="   https://cdn-icons-png.flaticon.com/512/3031/3031439.png "
+                        src=" https://cdn-icons-png.flaticon.com/512/3031/3031439.png "
                         class="icon w-15"
                     ></div>
                 <h3>{{ __('feature_eggs_title') }}</h3>

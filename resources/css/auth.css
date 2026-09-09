@@ -54,7 +54,7 @@
 
 @media (max-width: 760px) {
     .auth-shell { display: block; }
-    .auth-intro { min-height: 280px; padding: 25px 24px; }
+    .auth-intro {padding: 25px 24px; }
     .auth-intro::before { height: 220px; right: -110px; top: 18%; width: 220px; }
     .auth-brand { font-size: 1.25rem; }
     .auth-brand img { height: 30px; width: 30px; }

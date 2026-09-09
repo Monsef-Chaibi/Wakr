@@ -16,6 +16,7 @@ Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:6,
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+Route::view('/dashboard', 'dashboard')->middleware('auth')->name('dashboard');
 
 // Language-prefixed routes
 Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|ar']], function () {
@@ -39,4 +40,8 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|ar']], functio
         App::setLocale($locale);
         return app(AuthController::class)->register($request);
     });
+    Route::get('/dashboard', function ($locale) {
+        App::setLocale($locale);
+        return view('dashboard');
+    })->middleware('auth')->name('localized.dashboard');
 });
