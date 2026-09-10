@@ -16,7 +16,35 @@ Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:6,
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
-Route::view('/dashboard', 'dashboard')->middleware('auth')->name('dashboard');
+Route::get('/dashboard', function () {
+    App::setLocale('en');
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
+
+Route::get('/birds', function () {
+    App::setLocale('en');
+    return view('birds');
+})->middleware('auth')->name('birds');
+
+Route::get('/cages', function () {
+    App::setLocale('en');
+    return view('workspace', ['workspaceType' => 'cages']);
+})->middleware('auth')->name('cages');
+
+Route::get('/breeding', function () {
+    App::setLocale('en');
+    return view('workspace', ['workspaceType' => 'breeding']);
+})->middleware('auth')->name('breeding');
+
+Route::get('/records', function () {
+    App::setLocale('en');
+    return view('workspace', ['workspaceType' => 'records']);
+})->middleware('auth')->name('records');
+
+Route::get('/program', function () {
+    App::setLocale('en');
+    return view('program');
+})->middleware('auth')->name('program');
 
 // Language-prefixed routes
 Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|ar']], function () {
@@ -44,4 +72,24 @@ Route::group(['prefix' => '{locale}', 'where' => ['locale' => 'en|ar']], functio
         App::setLocale($locale);
         return view('dashboard');
     })->middleware('auth')->name('localized.dashboard');
+    Route::get('/birds', function ($locale) {
+        App::setLocale($locale);
+        return view('birds');
+    })->middleware('auth')->name('localized.birds');
+    Route::get('/cages', function ($locale) {
+        App::setLocale($locale);
+        return view('workspace', ['workspaceType' => 'cages']);
+    })->middleware('auth')->name('localized.cages');
+    Route::get('/breeding', function ($locale) {
+        App::setLocale($locale);
+        return view('workspace', ['workspaceType' => 'breeding']);
+    })->middleware('auth')->name('localized.breeding');
+    Route::get('/records', function ($locale) {
+        App::setLocale($locale);
+        return view('workspace', ['workspaceType' => 'records']);
+    })->middleware('auth')->name('localized.records');
+    Route::get('/program', function ($locale) {
+        App::setLocale($locale);
+        return view('program');
+    })->middleware('auth')->name('localized.program');
 });
