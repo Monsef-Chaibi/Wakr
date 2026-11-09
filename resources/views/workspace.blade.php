@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/css/dashboard.css', 'resources/js/app.js'])
+    @livewireStyles
+    @livewireStyles
 </head>
 <body class="dashboard-page workspace-page">
     @php
@@ -20,19 +22,14 @@
     @endphp
     <x-dashboard-shell :is-arabic="$isArabic" :active-page="$workspaceType">
             <main class="dashboard-content workspace-content">
-                <div class="birds-page-heading"><div><span class="dashboard-eyebrow">{{ __('dashboard_workspace') }}</span><h1>{{ __($workspaceType . '_title') }}</h1><p>{{ __($workspaceType . '_subtitle') }}</p></div><button class="dashboard-primary-button" type="button"><span>+</span>{{ __($workspaceData['add']) }}</button></div>
-                <section class="birds-stats" aria-label="{{ __($workspaceType . '_title') }}"><article class="birds-stat"><span class="birds-stat-icon birds-stat-green">&#9670;</span><div><span>{{ __($workspaceData['stats'][0]) }}</span><strong>{{ $workspaceType === 'cages' ? '24' : ($workspaceType === 'breeding' ? '16' : '248') }}</strong></div></article><article class="birds-stat"><span class="birds-stat-icon birds-stat-blue">&#10003;</span><div><span>{{ __($workspaceData['stats'][1]) }}</span><strong>{{ $workspaceType === 'cages' ? '18' : ($workspaceType === 'breeding' ? '7' : '84') }}</strong></div></article><article class="birds-stat"><span class="birds-stat-icon birds-stat-coral">&#9672;</span><div><span>{{ __($workspaceData['stats'][2]) }}</span><strong>{{ $workspaceType === 'cages' ? '6' : ($workspaceType === 'breeding' ? '4' : '32') }}</strong></div></article></section>
-                <section class="birds-panel panel"><div class="birds-toolbar"><label class="birds-search"><span aria-hidden="true">&#9906;</span><input type="search" placeholder="{{ __($workspaceData['search']) }}" aria-label="{{ __($workspaceData['search']) }}"></label><span class="workspace-toolbar-note">{{ __('program_upcoming') }}</span></div>
-                    <div class="birds-table-wrap">
-                        @if ($workspaceType === 'cages')
-                            <table class="birds-table"><thead><tr><th>{{ __('cages_table_cage') }}</th><th>{{ __('cages_table_location') }}</th><th>{{ __('cages_table_capacity') }}</th><th>{{ __('cages_table_occupancy') }}</th><th>{{ __('cages_table_status') }}</th></tr></thead><tbody><tr><td><div class="bird-identity"><span class="bird-avatar bird-avatar-green">04</span><span><strong>Cage 04</strong><small>CN-0004</small></span></div></td><td>Breeding room</td><td>8 birds</td><td>4 / 8</td><td><span class="bird-status status-active">{{ __('cages_status_active') }}</span></td></tr><tr><td><div class="bird-identity"><span class="bird-avatar bird-avatar-yellow">02</span><span><strong>Cage 02</strong><small>CN-0002</small></span></div></td><td>North wall</td><td>4 birds</td><td>2 / 4</td><td><span class="bird-status status-pair">{{ __('cages_status_active') }}</span></td></tr><tr><td><div class="bird-identity"><span class="bird-avatar bird-avatar-blue">07</span><span><strong>Cage 07</strong><small>CN-0007</small></span></div></td><td>Nursery</td><td>6 birds</td><td>0 / 6</td><td><span class="bird-status status-resting">{{ __('cages_status_available') }}</span></td></tr></tbody></table>
-                        @elseif ($workspaceType === 'breeding')
-                            <table class="birds-table"><thead><tr><th>{{ __('breeding_table_pair') }}</th><th>{{ __('breeding_table_birds') }}</th><th>{{ __('breeding_table_cage') }}</th><th>{{ __('breeding_table_eggs') }}</th><th>{{ __('breeding_table_next') }}</th></tr></thead><tbody><tr><td><div class="bird-identity"><span class="bird-avatar bird-avatar-coral">L/S</span><span><strong>Luna & Sol</strong><small>PAIR-0016</small></span></div></td><td>Lovebirds</td><td>Cage 02</td><td>4</td><td><span class="bird-status status-pair">{{ __('breeding_status_hatching') }}</span></td></tr><tr><td><div class="bird-identity"><span class="bird-avatar bird-avatar-green">M/B</span><span><strong>Milo & Bibi</strong><small>PAIR-0015</small></span></div></td><td>Budgerigars</td><td>Cage 04</td><td>0</td><td><span class="bird-status status-active">{{ __('breeding_status_ready') }}</span></td></tr><tr><td><div class="bird-identity"><span class="bird-avatar bird-avatar-yellow">C/R</span><span><strong>Coco & Rio</strong><small>PAIR-0014</small></span></div></td><td>Cockatiels</td><td>Cage 08</td><td>3</td><td><span class="bird-status status-resting">{{ __('breeding_status_nesting') }}</span></td></tr></tbody></table>
-                        @else
-                            <table class="birds-table"><thead><tr><th>{{ __('records_table_activity') }}</th><th>{{ __('records_table_subject') }}</th><th>{{ __('records_table_type') }}</th><th>{{ __('records_table_date') }}</th><th>{{ __('records_table_notes') }}</th></tr></thead><tbody><tr><td><strong>New bird added</strong></td><td>Sky · BRD-00128</td><td><span class="bird-status status-active">{{ __('records_type_flock') }}</span></td><td>Jun 14, 2026</td><td>Joined the flock</td></tr><tr><td><strong>Health check completed</strong></td><td>Luna · BRD-00127</td><td><span class="bird-status status-resting">{{ __('records_type_health') }}</span></td><td>Jun 13, 2026</td><td>Routine check</td></tr><tr><td><strong>Pairing updated</strong></td><td>Luna & Sol</td><td><span class="bird-status status-pair">{{ __('records_type_breeding') }}</span></td><td>Jun 12, 2026</td><td>Pair confirmed</td></tr></tbody></table>
-                        @endif
-                    </div>
-                </section>
+                <div class="birds-page-heading"><div><span class="dashboard-eyebrow">{{ __('dashboard_workspace') }}</span><h1>{{ __($workspaceType . '_title') }}</h1><p>{{ __($workspaceType . '_subtitle') }}</p></div><button class="dashboard-primary-button" data-workspace-add type="button"><span>+</span>{{ __($workspaceData['add']) }}</button></div>
+                @if ($workspaceType === 'cages')
+                    <livewire:cages.cage-list />
+                @elseif ($workspaceType === 'breeding')
+                    <livewire:breeding.pair-list />
+                @else
+                    <livewire:records.record-list />
+                @endif
             </main>
     </x-dashboard-shell>
     <script>
@@ -42,7 +39,77 @@
             document.querySelector('[data-sidebar-open]').addEventListener('click', () => setSidebar(true)); document.querySelectorAll('[data-sidebar-close]').forEach((button) => button.addEventListener('click', () => setSidebar(false)));
             languageToggle.addEventListener('change', () => { window.location.href = languageToggle.checked ? languageToggle.dataset.arUrl : languageToggle.dataset.enUrl; });
             search.addEventListener('input', () => { const term = search.value.toLowerCase(); rows.forEach((row) => { row.hidden = !row.textContent.toLowerCase().includes(term); }); });
+            document.querySelector('[data-workspace-add]')?.addEventListener('click', () => {
+                const componentElement = document.querySelector('[wire\\:id]');
+                const component = componentElement
+                    ? window.Livewire.find(componentElement.getAttribute('wire:id'))
+                    : null;
+
+                component?.call('openCreateForm');
+            });
+
+            document.addEventListener('click', async (event) => {
+                const deleteButton = event.target.closest('[data-delete-cage]');
+                const deletePairButton = event.target.closest('[data-delete-pair]');
+
+                if (!deleteButton && !deletePairButton) {
+                    return;
+                }
+
+                event.preventDefault();
+                event.stopImmediatePropagation();
+
+                const result = await window.Swal.fire({
+                    title: deleteButton ? 'Delete this cage?' : 'Delete this breeding pair?',
+                    text: deleteButton
+                        ? `${deleteButton.dataset.cageName} will be deleted and its birds unassigned.`
+                        : `${deletePairButton.dataset.pairName} will be permanently deleted.`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Delete',
+                    cancelButtonText: 'Cancel',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#78908a',
+                    reverseButtons: true,
+                });
+
+                if (!result.isConfirmed) {
+                    return;
+                }
+
+                const activeDeleteButton = deleteButton ?? deletePairButton;
+                const componentElement = activeDeleteButton.closest('[wire\\:id]');
+                const component = componentElement
+                    ? window.Livewire.find(componentElement.getAttribute('wire:id'))
+                    : null;
+
+                if (deleteButton) {
+                    component?.call('deleteCage', Number(deleteButton.dataset.deleteCage));
+                } else {
+                    component?.call('deletePair', Number(deletePairButton.dataset.deletePair));
+                }
+            }, true);
+
+            window.addEventListener('cage-deleted', () => {
+                window.Toast?.fire({
+                    icon: 'success',
+                    title: 'Cage deleted successfully.',
+                    background: '#a5dc86',
+                    iconColor: '#1f4b39',
+                });
+            });
+
+            window.addEventListener('pair-deleted', () => {
+                window.Toast?.fire({
+                    icon: 'success',
+                    title: 'Breeding pair deleted successfully.',
+                    background: '#a5dc86',
+                    iconColor: '#1f4b39',
+                });
+            });
         });
     </script>
+    @livewireScripts
+    @livewireScripts
 </body>
 </html>
